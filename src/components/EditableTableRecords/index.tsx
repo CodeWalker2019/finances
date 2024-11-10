@@ -1,74 +1,52 @@
-import { Table, TableHead, TableRow, TableCell, Button, TableBody, TableFooter, Skeleton } from "@mui/material";
-import TableDataRow from "./TableDataRow";
-import ColumnHeader from "./HeaderColumn";
+import { useMemo } from "react";
+import jsonServerApi from "../../api/jsonServer";
+import EditableTableRecordsComponent, { Column } from "./EditableTableRecordsComponent";
+import { IncomeSource } from "../../types";
+import { ENTITY_TYPES } from "../../constants";
 
-export type ItemId = { id: string }
-
-export interface Column {
-  adorment?: string
-  accessor: string
-  label: string
-}
-
-export interface GenericTableProps<T extends ItemId> {
-  handleRemoveItem: (item: T) => void
-  handleEditItem: (item: T) => void
-  handleAddItem: () => void
-  columns: Column[]
+interface TableProps {
+  dataParser?: (items: any) => any
+  getInitialItem: () => any
   isLoading: boolean
-  data: T[]
+  columns: Column[]
+  type: ENTITY_TYPES
+  addButtonLabel: string
 }
 
-export default function EditableTableRecords<T extends ItemId>({
-  handleRemoveItem,
-  handleEditItem,
-  handleAddItem,
-  isLoading,
-  columns,
-  data,
-}: GenericTableProps<T>) {
-  if (isLoading) {
-    return (
-      <>
-        <Skeleton animation="wave" height={40} />
-        <Skeleton animation="wave" height={40} />
-        <Skeleton animation="wave" height={40} />
-        <Skeleton animation="wave" height={40} />
-        <Skeleton animation="wave" height={40} />
-      </>
-    )
+export default function EditableTableRecords({ addButtonLabel, columns, dataParser = (data) => data, type, getInitialItem, isLoading }: TableProps) {
+  const { data = [] } = jsonServerApi[`useGet${type}sQuery`]()
+  const [update] = jsonServerApi[`useUpdate${type}Mutation`]()
+  const [remove] = jsonServerApi[`useRemove${type}Mutation`]()
+  const [add] = jsonServerApi[`useAdd${type}Mutation`]()
+
+  type entityType = typeof data[number]
+
+  const parsedData = useMemo(
+    () => dataParser(data),
+    [data, dataParser],
+  )
+
+  function handleAdd() {
+    add(getInitialItem())
   }
 
-  const columnsRender = columns.map((c, index) => (
-    <ColumnHeader key={c.label} column={c} index={index} />
-  ))
-  
+  function handleEdit(item: entityType) {
+    update(item)
+  }
+
+  function handleRemove(item: entityType) {
+    remove(item.id)
+  }
+
   return (
-    <Table stickyHeader aria-label="sticky table">
-      <TableHead>
-        <TableRow>
-          <TableCell width={3}></TableCell>
-          {columnsRender}
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {data.map((item) => (
-          <TableDataRow<T>
-            handleRemoveItem={handleRemoveItem}
-            handleEditItem={handleEditItem}
-            columns={columns}
-            key={item.id}
-            item={item}
-          />
-        ))}
-      </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TableCell sx={{ borderBottom: "none" }} colSpan={5}>
-            <Button onClick={handleAddItem} color="primary">+ Add income source</Button>
-          </TableCell>
-        </TableRow>
-      </TableFooter>
-    </Table>
+    <EditableTableRecordsComponent<entityType>
+      handleRemoveItem={handleRemove}
+      handleEditItem={handleEdit}
+      handleAddItem={handleAdd}
+      data={parsedData}
+      isLoading={isLoading}
+      columns={columns}
+      addButtonLabel={addButtonLabel}
+    />
   )
 }

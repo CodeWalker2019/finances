@@ -1,5 +1,5 @@
 import { TableCell } from "@mui/material"
-import { Column, ItemId } from "."
+import { Column, ItemId } from "./EditableTableRecordsComponent"
 
 interface ColumnHeaderProps {
   column: Column

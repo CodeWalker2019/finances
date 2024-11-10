@@ -1,10 +1,12 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { IncomeSource } from '../types'
+import { Expanse, IncomeSource } from '../types'
 
 const JSON_SERVER_BASE_QUERY = 'http://localhost:3001'
 
 const INCOME_SOURCE_TAG_TYPE = 'INCOME_SOURCE_TAG_TYPE' as const
+const EXPANSE_TAG_TYPE = 'EXPANSE_TAG_TYPE' as const
+const TAG_TYPES = [INCOME_SOURCE_TAG_TYPE, EXPANSE_TAG_TYPE]
 
 const baseQuery = fetchBaseQuery({ baseUrl: JSON_SERVER_BASE_QUERY, prepareHeaders: (headers) => {
   headers.set('Accept', 'application/json');
@@ -13,7 +15,7 @@ const baseQuery = fetchBaseQuery({ baseUrl: JSON_SERVER_BASE_QUERY, prepareHeade
 
 const jsonServerApi = createApi({
   reducerPath: 'jsonServerApi',
-  tagTypes: [INCOME_SOURCE_TAG_TYPE],
+  tagTypes: TAG_TYPES,
   baseQuery,
   endpoints: (builder) => ({
     getIncomeSources: builder.query<IncomeSource[], void>({
@@ -45,6 +47,49 @@ const jsonServerApi = createApi({
         body
       }),
       invalidatesTags: [{ type: INCOME_SOURCE_TAG_TYPE, id: 'LIST' }],
+    }),
+
+    getExpanses: builder.query<Expanse[], void>({
+      query: () => '/expanses',
+      providesTags: [
+        { type: INCOME_SOURCE_TAG_TYPE, id: 'LIST' },
+        { type: EXPANSE_TAG_TYPE, id: 'LIST' },
+      ]
+    }),
+
+    addExpanse: builder.mutation<void, Omit<Expanse, 'id'>>({
+      query: (body) => ({
+        url: '/expanses',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: [
+        { type: INCOME_SOURCE_TAG_TYPE, id: 'LIST' },
+        { type: EXPANSE_TAG_TYPE, id: 'LIST' },
+      ],
+    }),
+
+    removeExpanse: builder.mutation({
+      query: (id) => ({
+        url: `/expanses/${id}`,
+        method: 'DELETE',
+      }),
+            invalidatesTags: [
+        { type: INCOME_SOURCE_TAG_TYPE, id: 'LIST' },
+        { type: EXPANSE_TAG_TYPE, id: 'LIST' },
+      ],
+    }),
+
+    updateExpanse: builder.mutation({
+      query: (body) => ({
+        url: `/expanses/${body.id}`,
+        method: 'PUT',
+        body
+      }),
+            invalidatesTags: [
+        { type: INCOME_SOURCE_TAG_TYPE, id: 'LIST' },
+        { type: EXPANSE_TAG_TYPE, id: 'LIST' },
+      ],
     }),
   }),
 })

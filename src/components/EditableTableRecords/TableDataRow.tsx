@@ -1,6 +1,6 @@
 import { TableRow, TableCell, TextField, Input, InputAdornment, IconButton } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
-import { Column, ItemId } from ".";
+import { Column, ItemId } from "./EditableTableRecordsComponent";
 
 interface IncomeSourceItemProps<T extends ItemId> {
   handleRemoveItem: (item: T) => void
@@ -41,7 +41,7 @@ export default function IncomeSourceTable<T extends ItemId>({
       )
     }
 
-    const adorment = column.adorment ? <InputAdornment position="end">$</InputAdornment> : undefined
+    const adorment = column.adorment ? <InputAdornment position="end">{column.adorment}</InputAdornment> : undefined
 
     return (
       <Input
@@ -50,6 +50,7 @@ export default function IncomeSourceTable<T extends ItemId>({
         type="number"
         disableUnderline
         value={value}
+        disabled={!column.editable}
         onChange={handleUpdate}
         endAdornment={adorment}
         inputProps={{ style: { textAlign: 'right' }}}

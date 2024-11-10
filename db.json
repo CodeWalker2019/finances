@@ -1,9 +1,48 @@
 {
   "incomeSources": [
     {
-      "id": "fa33",
-      "source": "FE Developer Incora",
-      "value": "1995"
+      "id": "5019",
+      "source": "Income Source",
+      "value": "1995",
+      "uah": 8288.21,
+      "gross": 7873.8
     }
   ],
+  "expanses": [
+    {
+      "id": "a0d9",
+      "source": "Expanse source",
+      "value": 0
+    },
+    {
+      "id": "49ee",
+      "source": "Expanse source (1)",
+      "value": 0
+    },
+    {
+      "id": "d4b1",
+      "source": "Expanse source (2)",
+      "value": 0
+    },
+    {
+      "id": "2200",
+      "source": "Expanse source (3)",
+      "value": 0
+    },
+    {
+      "id": "be56",
+      "source": "Expanse source (4)",
+      "value": 0
+    },
+    {
+      "id": "0795",
+      "source": "Expanse source (5)",
+      "value": 0
+    },
+    {
+      "id": "2bd6",
+      "source": "Expanse source (6)",
+      "value": 0
+    }
+  ]
 }

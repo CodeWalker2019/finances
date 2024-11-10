@@ -11,3 +11,9 @@ export interface Currency {
   rateBuy: number
   rateSell: number
 }
+
+export interface Expanse {
+  source: string
+  value: number
+  id: string
+}
