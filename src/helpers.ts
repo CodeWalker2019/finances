@@ -44,5 +44,6 @@ export function calculateRemaingMoney(expanses: Expanse[], incomeSources: Income
   const totalExpansesValue = sum(expanses.map(e => e.value))
   const income = incomeSources.map(s => getIncomeUahValue(s, usd).gross)
   const totalIncome = sum(income)
+  console.log({ totalIncome, income, totalExpansesValue })
   return totalIncome - totalExpansesValue
 }

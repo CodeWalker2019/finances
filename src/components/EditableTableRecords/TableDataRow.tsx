@@ -21,7 +21,13 @@ export default function IncomeSourceTable<T extends ItemId>({
 
   function handleUpdate(event: React.ChangeEvent) {
     const { name, value } = event.target as HTMLInputElement
-    handleEditItem({ ...item, [name]: value })
+    try {
+      const parsedValue = Number.parseFloat(value)
+      handleEditItem({ ...item, [name]: parsedValue })
+    } catch(e) {
+      handleEditItem({ ...item, [name]: value })
+    }
+    
   }
 
   function getContent(index: number, column: Column) {
