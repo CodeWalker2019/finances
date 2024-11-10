@@ -9,7 +9,7 @@ export default function Settings() {
 
   return (
     <Container>
-      <div>
+      <div className="w-full flex items-center justify-between">
         <h1>Finances</h1>
         <IconButton onClick={() => navigate(-1)} aria-label="close">
             <ClearIcon />
