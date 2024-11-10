@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "finances",
   "version": "0.2.0",
   "author": "Your Name",
   "description": "React-TypeScript-Electron sample with Create React App and Electron Builder",
@@ -52,7 +52,18 @@
     "eject": "react-scripts eject"
   },
   "build": {
+    "productName": "Finances",
+    "appId": "com.codewalker.finances",
     "extends": null,
+    "mac": {
+      "icon": "app-icon.png"
+    },
+    "win": {
+      "icon": "app-icon.png"
+    },
+    "linux": {
+      "icon": "app-icon.png"
+    },
     "files": [
       "build/**/*"
     ],

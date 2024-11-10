@@ -1,16 +1,28 @@
 import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
+import { ChildProcess, spawn } from 'child_process';
+
+let jsonServerProcess: ChildProcess | null;
+
+const INITIAL_WINDOW_SIZE = {
+  WIDTH: 1200,
+  HEIGHT: 900,
+}
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: INITIAL_WINDOW_SIZE.WIDTH,
+    height: INITIAL_WINDOW_SIZE.HEIGHT,
+    minWidth: INITIAL_WINDOW_SIZE.WIDTH,  // Minimum width
+    minHeight: INITIAL_WINDOW_SIZE.HEIGHT, // Minimum height
     webPreferences: {
       // contextIsolation: false,
       preload: path.join(__dirname, 'preload.js')
-    }
+    },
   })
+
+  win.removeMenu();
 
   if (app.isPackaged) {
     // 'build/index.html'
@@ -34,12 +46,26 @@ function createWindow() {
   }
 }
 
+function startJsonServer() {
+  // Start JSON Server in a child process
+  jsonServerProcess = spawn('npx', ['json-server', '--watch', 'db.json', '--port', '3001'], {
+    stdio: 'ignore',
+    shell: true,
+    windowsHide: true,
+  });
+
+  jsonServerProcess.on('error', (error) => {
+    console.error('Failed to start JSON Server:', error);
+  });
+}
+
 app.whenReady().then(() => {
   // DevTools
   installExtension(REACT_DEVELOPER_TOOLS)
     .then((name) => console.log(`Added Extension:  ${name}`))
     .catch((err) => console.log('An error occurred: ', err));
 
+  startJsonServer();
   createWindow();
 
   app.on('activate', () => {
@@ -49,6 +75,7 @@ app.whenReady().then(() => {
   });
 
   app.on('window-all-closed', () => {
+    if (jsonServerProcess) jsonServerProcess.kill();
     if (process.platform !== 'darwin') {
       app.quit();
     }
