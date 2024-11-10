@@ -40,9 +40,23 @@ export function getCalculatedIncomeSource(sources: IncomeSource[], usd?: Currenc
   return sources
 }
 
-export function calculateRemaingMoney(expanses: Expanse[], incomeSources: IncomeSource[], usd: Currency) {
-  const totalExpansesValue = sum(expanses.map(e => e.value))
+export function calculateTotalIncome(incomeSources: IncomeSource[], usd: Currency) {
   const income = incomeSources.map(s => getIncomeUahValue(s, usd).gross)
-  const totalIncome = sum(income)
+  return sum(income)
+}
+
+export function calculateTotalExpanses(expanses: Expanse[]) {
+  const income = expanses.map(s => s.value)
+  return sum(income)
+}
+
+export function calculateRemaingMoney(expanses: Expanse[], totalIncome: number, usd: Currency) {
+  const totalExpansesValue = sum(expanses.map(e => e.value))
   return totalIncome - totalExpansesValue
+}
+
+export const valueFormatter = (item: { value: number }) => `${item.value}%`;
+
+export function percentage(part: number, whole: number) {
+  return Math.round((part / whole) * 100)
 }

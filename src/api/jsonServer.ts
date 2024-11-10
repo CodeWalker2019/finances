@@ -6,7 +6,8 @@ const JSON_SERVER_BASE_QUERY = 'http://localhost:3001'
 
 const INCOME_SOURCE_TAG_TYPE = 'INCOME_SOURCE_TAG_TYPE' as const
 const EXPANSE_TAG_TYPE = 'EXPANSE_TAG_TYPE' as const
-const TAG_TYPES = [INCOME_SOURCE_TAG_TYPE, EXPANSE_TAG_TYPE]
+const UNPLANNED_EXPANSE_TAG_TYPE = 'UNPLANNED_EXPANSE_TAG_TYPE' as const
+const TAG_TYPES = [UNPLANNED_EXPANSE_TAG_TYPE, INCOME_SOURCE_TAG_TYPE, EXPANSE_TAG_TYPE]
 
 const baseQuery = fetchBaseQuery({ baseUrl: JSON_SERVER_BASE_QUERY, prepareHeaders: (headers) => {
   headers.set('Accept', 'application/json');
@@ -52,7 +53,6 @@ const jsonServerApi = createApi({
     getExpanses: builder.query<Expanse[], void>({
       query: () => '/expanses',
       providesTags: [
-        { type: INCOME_SOURCE_TAG_TYPE, id: 'LIST' },
         { type: EXPANSE_TAG_TYPE, id: 'LIST' },
       ]
     }),
@@ -64,7 +64,6 @@ const jsonServerApi = createApi({
         body,
       }),
       invalidatesTags: [
-        { type: INCOME_SOURCE_TAG_TYPE, id: 'LIST' },
         { type: EXPANSE_TAG_TYPE, id: 'LIST' },
       ],
     }),
@@ -75,7 +74,6 @@ const jsonServerApi = createApi({
         method: 'DELETE',
       }),
             invalidatesTags: [
-        { type: INCOME_SOURCE_TAG_TYPE, id: 'LIST' },
         { type: EXPANSE_TAG_TYPE, id: 'LIST' },
       ],
     }),
@@ -86,9 +84,47 @@ const jsonServerApi = createApi({
         method: 'PUT',
         body
       }),
-            invalidatesTags: [
-        { type: INCOME_SOURCE_TAG_TYPE, id: 'LIST' },
+    invalidatesTags: [
         { type: EXPANSE_TAG_TYPE, id: 'LIST' },
+      ],
+    }),
+
+    getUnplannedExpanses: builder.query<Expanse[], void>({
+      query: () => '/unplanned-expanses',
+      providesTags: [
+        { type: UNPLANNED_EXPANSE_TAG_TYPE, id: 'LIST' },
+      ]
+    }),
+
+    addUnplannedExpanse: builder.mutation<void, Omit<Expanse, 'id'>>({
+      query: (body) => ({
+        url: '/unplanned-expanses',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: [
+        { type: UNPLANNED_EXPANSE_TAG_TYPE, id: 'LIST' },
+      ],
+    }),
+
+    removeUnplannedExpanse: builder.mutation({
+      query: (id) => ({
+        url: `/unplanned-expanses/${id}`,
+        method: 'DELETE',
+      }),
+            invalidatesTags: [
+        { type: UNPLANNED_EXPANSE_TAG_TYPE, id: 'LIST' },
+      ],
+    }),
+
+    updateUnplannedExpanse: builder.mutation({
+      query: (body) => ({
+        url: `/unplanned-expanses/${body.id}`,
+        method: 'PUT',
+        body
+      }),
+            invalidatesTags: [
+        { type: UNPLANNED_EXPANSE_TAG_TYPE, id: 'LIST' },
       ],
     }),
   }),

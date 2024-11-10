@@ -1,6 +1,6 @@
 import monobankApi from "../../api/monobank";
 import jsonServerApi from "../../api/jsonServer";
-import { calculateRemaingMoney, getUniqueName } from "../../helpers";
+import { calculateRemaingMoney, calculateTotalIncome, getUniqueName } from "../../helpers";
 import { ENTITY_TYPES, EXPANSES_INITIAL_NAME } from "../../constants";
 import EditableTableRecords from "../../components/EditableTableRecords";
 import { useMemo } from "react";
@@ -12,7 +12,7 @@ const COLUMNS = [
     editable: true,
   },
   {
-    label: 'UAH',
+    label: 'UAH ₴',
     accessor: 'value',
     adorment: '₴',
     editable: true,
@@ -25,7 +25,10 @@ export default function IncomeSourceTable() {
   const { data: incomeSources = [] } = jsonServerApi.useGetIncomeSourcesQuery()
   
   const remainingBudget = useMemo(() => {
-    if (usd) return calculateRemaingMoney(expanses, incomeSources, usd)
+    if (usd) {
+      const totalIncome = calculateTotalIncome(incomeSources, usd)
+      return calculateRemaingMoney(expanses, totalIncome, usd)
+    }
     return 0
   }, [usd, expanses, incomeSources])
 

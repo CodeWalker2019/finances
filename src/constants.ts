@@ -5,4 +5,5 @@ export const EXPANSES_INITIAL_NAME = 'Expanse source'
 export enum ENTITY_TYPES {
   'Expanse' = 'Expanse',
   'IncomeSource' = 'IncomeSource',
+  'UnplannedExpanse' = 'UnplannedExpanse'
 }
