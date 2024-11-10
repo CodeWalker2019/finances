@@ -1,8 +1,8 @@
-import monobankApi from "../api/monobank";
-import jsonServerApi from "../api/jsonServer";
-import { calculateRemaingMoney, getUniqueName } from "../helpers";
-import { ENTITY_TYPES, EXPANSES_INITIAL_NAME } from "../constants";
-import EditableTableRecords from "../components/EditableTableRecords";
+import monobankApi from "../../api/monobank";
+import jsonServerApi from "../../api/jsonServer";
+import { calculateRemaingMoney, getUniqueName } from "../../helpers";
+import { ENTITY_TYPES, EXPANSES_INITIAL_NAME } from "../../constants";
+import EditableTableRecords from "../../components/EditableTableRecords";
 import { useMemo } from "react";
 
 const COLUMNS = [

@@ -1,9 +1,9 @@
-import monobankApi from "../api/monobank";
-import jsonServerApi from "../api/jsonServer";
-import { getCalculatedIncomeSource, getUniqueName } from "../helpers";
-import { ENTITY_TYPES, INCOMES_SOUCE_INITIAL_NAME } from "../constants";
-import EditableTableRecords from "../components/EditableTableRecords";
-import { IncomeSource } from "../types";
+import monobankApi from "../../api/monobank";
+import jsonServerApi from "../../api/jsonServer";
+import { getCalculatedIncomeSource, getUniqueName } from "../../helpers";
+import { ENTITY_TYPES, INCOMES_SOUCE_INITIAL_NAME } from "../../constants";
+import EditableTableRecords from "../../components/EditableTableRecords";
+import { IncomeSource } from "../../types";
 
 const COLUMNS = [
   {
