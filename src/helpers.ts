@@ -13,7 +13,7 @@ export function getGross(valueUah: number) {
 }
 
 function formatName(value: string) {
-  return value.trim().toLowerCase()
+  return value?.trim()?.toLowerCase()
 }
 
 export function getUniqueName(collection: string[], intialName: string) {
@@ -44,6 +44,5 @@ export function calculateRemaingMoney(expanses: Expanse[], incomeSources: Income
   const totalExpansesValue = sum(expanses.map(e => e.value))
   const income = incomeSources.map(s => getIncomeUahValue(s, usd).gross)
   const totalIncome = sum(income)
-  console.log({ totalIncome, income, totalExpansesValue })
   return totalIncome - totalExpansesValue
 }
