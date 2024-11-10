@@ -9,7 +9,8 @@ export default function Home() {
 
   return (
     <Container className="flex flex-col gap-9">
-      <div className="w-full flex items-center justify-end">
+      <div className="w-full flex items-center justify-between">
+        <h2>Money Analysis</h2>
         <IconButton onClick={() => navigate('/settings')} aria-label="close">
             <SettingsIcon />
         </IconButton>

@@ -1,14 +1,14 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import pages from "./pages";
 
 export default function Router() {
   return (
-    <BrowserRouter>
+    <HashRouter>
         <Routes>
           {pages.map(({ path, element }) => (
             <Route key={path} path={path} element={element} />
           ))}
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
   )
 }

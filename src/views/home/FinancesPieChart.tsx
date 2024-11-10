@@ -6,19 +6,16 @@ export default function FinancesPieChart() {
   const desktopOS = useFinancesPieChartData()
   
   return (
-    <>
-      <h2>Money Analysis</h2>
-      <PieChart
-        series={[
-          {
-            data: desktopOS,
-            highlightScope: { fade: 'global', highlight: 'item' },
-            faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
-            valueFormatter,
-          },
-        ]}
-        height={400}
-      />
-    </>
+    <PieChart
+      series={[
+        {
+          data: desktopOS,
+          highlightScope: { fade: 'global', highlight: 'item' },
+          faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
+          valueFormatter,
+        },
+      ]}
+      height={400}
+    />
   )
 }
