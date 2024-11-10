@@ -1,4 +1,5 @@
 import { INCOMES_SOUCE_INITIAL_NAME } from "./constants"
+import { Currency, IncomeSource } from "./types"
 
 const DEBT_PERCENTAGE = 5
 
@@ -26,4 +27,13 @@ export function getUniqueName(collection: string[], intialName: string) {
   })
 
   return name
+}
+
+export function getCalculateIncomeSource(sources: IncomeSource[], usd?: Currency) {
+  if (!usd) return sources
+  return sources.map((s) => {
+    const uah = twoValuesAfterCommaRound(usd.rateSell * s.value)
+    const gross = twoValuesAfterCommaRound(getGross(uah))
+    return { ...s, uah, gross }
+  })
 }
