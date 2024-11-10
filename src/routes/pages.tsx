@@ -1,9 +1,10 @@
+import Home from '../views/home'
 import Settings from '../views/settings'
 
 export default [
   {
-    path: '/home',
-    element: <div>This is home page</div>,
+    path: '/',
+    element: <Home />
   },
   {
     path: '/settings',
