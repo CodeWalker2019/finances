@@ -1,45 +1,8 @@
 {
   "incomeSources": [
-    {
-      "id": "9f28",
-      "source": "FE Developer Incora",
-      "value": 1995,
-      "uah": 8288.21,
-      "gross": 7873.8
-    }
   ],
   "expanses": [
-    {
-      "id": "294d",
-      "source": "Rent",
-      "value": 9500
-    },
-    {
-      "id": "4387",
-      "source": "Therapy",
-      "value": 2000
-    },
-    {
-      "id": "d17e",
-      "source": "Gym",
-      "value": 8100
-    },
-    {
-      "id": "fe1c",
-      "source": "Flowers",
-      "value": 5000
-    },
-    {
-      "id": "292f",
-      "source": "Taxi",
-      "value": 2500
-    }
   ],
   "unplanned-expanses": [
-    {
-      "id": "48c6",
-      "source": "Xu Braces",
-      "value": 10000
-    }
   ]
 }

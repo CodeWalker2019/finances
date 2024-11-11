@@ -13,14 +13,14 @@ export default function useFinancesPieChartData() {
     if (!usd) return []
 
     const totalIncome = calculateTotalIncome(incomeSources, usd)
-    const remaining = calculateRemaingMoney(expanses, totalIncome, usd)
     const totalExpanses = calculateTotalExpanses(expanses)
     const totalUnplannedExpanses = calculateTotalExpanses(unplannedExpanses)
+    const remaining = calculateRemaingMoney([...unplannedExpanses, ...expanses], totalIncome, usd)
 
     return [
-      { label: `Expanses [${totalExpanses} UAH ₴]`, value: percentage(totalExpanses, totalIncome) },
-      { label: `Unplanned Expanses [${totalUnplannedExpanses} UAH ₴]`, value: percentage(totalUnplannedExpanses, totalIncome) },
-      { label: `Remaining Money [${remaining} UAH ₴]`, value: percentage(remaining, totalIncome) },
+      { label: `Expanses [${totalExpanses} UAH ₴]`, value: percentage(totalExpanses, totalIncome) || 0 },
+      { label: `Unplanned Expanses [${totalUnplannedExpanses} UAH ₴]`, value: percentage(totalUnplannedExpanses, totalIncome) || 0 },
+      { label: `Remaining Money [${remaining} UAH ₴]`, value: percentage(remaining, totalIncome) || 0 },
     ]
   }, [incomeSources, expanses, usd, unplannedExpanses])
 

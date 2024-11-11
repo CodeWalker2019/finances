@@ -52,7 +52,7 @@ export function calculateTotalExpanses(expanses: Expanse[]) {
 
 export function calculateRemaingMoney(expanses: Expanse[], totalIncome: number, usd: Currency) {
   const totalExpansesValue = sum(expanses.map(e => e.value))
-  return totalIncome - totalExpansesValue
+  return Math.round((totalIncome - totalExpansesValue) * 100) / 100
 }
 
 export const valueFormatter = (item: { value: number }) => `${item.value}%`;
