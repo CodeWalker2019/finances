@@ -3,46 +3,43 @@
     {
       "id": "9f28",
       "source": "FE Developer Incora",
-      "value": 190,
-      "uah": 8121.61,
-      "gross": 7715.53
-    },
-    {
-      "id": "83ca",
-      "source": "Photo editing",
-      "value": 450,
-      "uah": 2082.46,
-      "gross": 1978.34
-    },
-    {
-      "id": "90a3",
-      "source": "Income Source",
-      "value": "",
-      "uah": 97560653.1,
-      "gross": 92682620.44
+      "value": 1995,
+      "uah": 8288.21,
+      "gross": 7873.8
     }
   ],
   "expanses": [
     {
       "id": "294d",
       "source": "Rent",
-      "value": 949
+      "value": 9500
     },
     {
       "id": "4387",
       "source": "Therapy",
-      "value": 200
+      "value": 2000
     },
     {
       "id": "d17e",
       "source": "Gym",
-      "value": 810
+      "value": 8100
     },
     {
       "id": "fe1c",
       "source": "Flowers",
-      "value": 1550
+      "value": 5000
+    },
+    {
+      "id": "292f",
+      "source": "Taxi",
+      "value": 2500
     }
   ],
-  "unplanned-expanses": []
+  "unplanned-expanses": [
+    {
+      "id": "48c6",
+      "source": "Xu Braces",
+      "value": 10000
+    }
+  ]
 }

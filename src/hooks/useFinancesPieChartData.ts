@@ -22,7 +22,7 @@ export default function useFinancesPieChartData() {
       { label: `Unplanned Expanses [${totalUnplannedExpanses} UAH ₴]`, value: percentage(totalUnplannedExpanses, totalIncome) },
       { label: `Remaining Money [${remaining} UAH ₴]`, value: percentage(remaining, totalIncome) },
     ]
-  }, [incomeSources, expanses, usd])
+  }, [incomeSources, expanses, usd, unplannedExpanses])
 
   return chartData
 }
