@@ -21,10 +21,7 @@ export default function EditableTableRecords({ addButtonLabel, columns, dataPars
 
   type entityType = typeof data[number]
 
-  const parsedData = useMemo(
-    () => dataParser(data),
-    [data, dataParser],
-  )
+  const parsedData = dataParser(data)
 
   function handleAdd() {
     add(getInitialItem())

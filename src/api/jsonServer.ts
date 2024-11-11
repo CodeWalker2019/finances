@@ -30,7 +30,9 @@ const jsonServerApi = createApi({
         method: 'POST',
         body,
       }),
-      invalidatesTags: [{ type: INCOME_SOURCE_TAG_TYPE, id: 'LIST' }],
+      invalidatesTags: [
+        { type: INCOME_SOURCE_TAG_TYPE, id: 'LIST' },
+      ],
     }),
 
     removeIncomeSource: builder.mutation({

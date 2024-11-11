@@ -3,33 +3,46 @@
     {
       "id": "9f28",
       "source": "FE Developer Incora",
-      "value": "1995",
-      "uah": 8288.21,
-      "gross": 7873.8
+      "value": 190,
+      "uah": 8121.61,
+      "gross": 7715.53
+    },
+    {
+      "id": "83ca",
+      "source": "Photo editing",
+      "value": 450,
+      "uah": 2082.46,
+      "gross": 1978.34
+    },
+    {
+      "id": "90a3",
+      "source": "Income Source",
+      "value": "",
+      "uah": 97560653.1,
+      "gross": 92682620.44
     }
   ],
   "expanses": [
     {
       "id": "294d",
       "source": "Rent",
-      "value": 9500
+      "value": 949
     },
     {
       "id": "4387",
       "source": "Therapy",
-      "value": 2000
+      "value": 200
     },
     {
       "id": "d17e",
       "source": "Gym",
-      "value": 8100
+      "value": 810
+    },
+    {
+      "id": "fe1c",
+      "source": "Flowers",
+      "value": 1550
     }
   ],
-  "unplanned-expanses": [
-    {
-      "id": "6751",
-      "source": "Debt",
-      "value": 4343
-    }
-  ]
+  "unplanned-expanses": []
 }

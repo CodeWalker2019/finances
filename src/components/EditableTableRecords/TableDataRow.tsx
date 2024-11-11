@@ -1,7 +1,6 @@
 import { TableRow, TableCell, TextField, Input, InputAdornment, IconButton, debounce } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import { Column, ItemId } from "./EditableTableRecordsComponent";
-import { useCallback, useState } from "react";
 
 interface IncomeSourceItemProps<T extends ItemId> {
   handleRemoveItem: (item: T) => void
@@ -20,21 +19,16 @@ export default function IncomeSourceTable<T extends ItemId>({
     handleRemoveItem(item)
   }
 
-  const [localItem, setItem] = useState(item)
-
-  const debouncedUpdate = useCallback(debounce(handleEditItem, 1000), []);
-
   function handleUpdate(event: React.ChangeEvent) {
     const { name, value } = event.target as HTMLInputElement
     const parsedValue = Number.parseFloat(value)
     const updated: Record<string, string | number> = { ...item, [name]: parsedValue };
     if (Number.isNaN(parsedValue)) updated[name] = value
-    debouncedUpdate(updated as T)
-    setItem(updated as T)
+    handleEditItem(updated as T)
   }
 
   function getContent(index: number, column: Column) {
-    const value = localItem[column.accessor as keyof T];
+    const value = item[column.accessor as keyof T];
 
     if (index === 0) {
       return (
